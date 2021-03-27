@@ -1,47 +1,100 @@
-import {useState} from "react";
-import {Cell } from "styled-css-grid";
-import { Home3Icon, Search3Icon, Heart3Icon, Setting3Icon } from '@iconbox/iconly';
-import MenuItem from './partials/menuItem';
-import { StyledSidebarGrid } from './styles';
+import { ReactNode, useState } from "react";
+import { Cell } from "styled-css-grid";
+import {
+  Home3Icon,
+  Search3Icon,
+  Heart3Icon,
+  Setting3Icon,
+} from "@iconbox/iconly";
+import MenuItem from "./partials/menuItem";
+import { StyledSidebarGrid, StyledMenuItemCell } from "./styles";
+import useCurrentBreakpoint from "../../Helpers/useCurrentBreakpoint";
+
+type MenuItem = {
+  title: string;
+  icon: ReactNode;
+  position: number;
+};
 
 const Index = () => {
-  const [activeMenu, setActiveMenu] = useState('Home');
-  const menus = [{
-    title: 'Home',
-    icon: <Home3Icon />,
-    position: 4,
-  },{
-    title: 'Search',
-    icon: <Search3Icon />,
-    position: 7,
-  },{
-    title: 'Donate',
-    icon: <Heart3Icon />,
-    position: 10,
-  },{
-    title: 'Setting',
-    icon: <Setting3Icon />,
-    position: 13,
-  }];
+  const [activeMenu, setActiveMenu] = useState("Home");
+  const currentBreakpoint = useCurrentBreakpoint();
+  const isMobile = currentBreakpoint === "mobile";
 
-  const handleMenuClick = menu => () => {
+  const menus: MenuItem[] = [
+    {
+      title: "Home",
+      icon: <Home3Icon className="menuIcon" />,
+      position: 6,
+    },
+    {
+      title: "Search",
+      icon: <Search3Icon className="menuIcon" />,
+      position: 9,
+    },
+    {
+      title: "Donate",
+      icon: <Heart3Icon className="menuIcon" />,
+      position: 12,
+    },
+    {
+      title: "Setting",
+      icon: <Setting3Icon className="menuIcon" />,
+      position: 15,
+    },
+  ];
+
+  const handleMenuClick = (menu: MenuItem) => () => {
     setActiveMenu(menu.title);
   };
 
   return (
-    <StyledSidebarGrid flow="column" columns={1}>
-      <Cell className="logo" height={2} top={2} center middle>IB</Cell>
+    <StyledSidebarGrid
+      flow={isMobile ? "row" : "column"}
+      rows={isMobile ? 1 : 25}
+      columns={isMobile ? 4 : 1}
+      gap={isMobile ? "0" : "8px"}
+    >
+      {!isMobile && (
+        <Cell
+          className="logo"
+          width={1}
+          height={isMobile ? 1 : 2}
+          top={isMobile ? undefined : 2}
+          center
+          middle
+        />
+      )}
       {menus.map((menu) => (
-        <Cell height={3} top={menu.position} center middle>
-          <MenuItem onClick={handleMenuClick(menu)} title={menu.title} icon={menu.icon} active={menu.title === activeMenu} />
-        </Cell>
+        <StyledMenuItemCell
+          key={menu.title}
+          width={1}
+          height={isMobile ? 1 : 3}
+          top={isMobile ? undefined : menu.position}
+          center
+          middle
+        >
+          <MenuItem
+            onClick={handleMenuClick(menu)}
+            title={menu.title}
+            icon={menu.icon}
+            active={menu.title === activeMenu}
+          />
+        </StyledMenuItemCell>
       ))}
-      <Cell height={3} top={21} center middle>
-        <div className="version">v1.0.214</div>
-      </Cell>
+      {!isMobile && (
+        <Cell
+          width={1}
+          height={isMobile ? 1 : 3}
+          top={isMobile ? undefined : 20}
+          center
+          middle
+        >
+          <div className="version">v2.1.22</div>
+        </Cell>
+      )}
     </StyledSidebarGrid>
   );
 };
-
 
 export default Index;

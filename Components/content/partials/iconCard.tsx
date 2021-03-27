@@ -1,9 +1,15 @@
-import React from 'react';
-import {Cell} from "styled-css-grid";
+import React from "react";
+import { StyledCard } from "./styles";
+import { makeFilePath } from "../../../Helpers";
+import Image from "../../Image";
 
-const IconCard = ({ icon }) => {
+const IconCard = ({ icon, pack }) => {
+  const imageUrl = makeFilePath(pack, icon);
   return (
-    <div>{icon}</div>
+    <StyledCard key={imageUrl}>
+      <Image key={imageUrl} url={imageUrl} alt={icon} />
+      {icon}
+    </StyledCard>
   );
 };
 

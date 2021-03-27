@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import {Cell, Grid} from "styled-css-grid";
+import styled from "styled-components";
+import { Cell, Grid } from "styled-css-grid";
 
 export const StyledSidebarGrid = styled(Grid)`
   border-right: 1px solid #f8f8f8;
@@ -11,7 +11,7 @@ export const StyledSidebarGrid = styled(Grid)`
     position: relative;
     top: -10px;
   }
-  
+
   .version {
     font-size: 12px;
     color: #e1e1e1;
@@ -20,6 +20,10 @@ export const StyledSidebarGrid = styled(Grid)`
   }
 `;
 
+export const StyledMenuItemCell = styled(Cell)`
+  overflow: hidden;
+  position: relative;
+`;
 
 export const StyledMenuItem = styled.div`
   border-radius: 15px;
@@ -34,10 +38,18 @@ export const StyledMenuItem = styled.div`
   color: #bfc0c5;
   cursor: pointer;
   &.active {
-    background: #ff336c;
+    * {
+      position: absolute;
+    }
     color: #fff;
-    svg {
+    .menuIcon {
       color: #fff;
+      z-index: 98;
+      top: 17px;
+    }
+    span {
+      z-index: 99;
+      bottom: 17px;
     }
   }
   svg {
@@ -45,5 +57,15 @@ export const StyledMenuItem = styled.div`
     width: 32px !important;
     height: 32px !important;
     margin-bottom: 8px;
+  }
+  &.isMobile {
+    margin: 5px 10px;
+  }
+
+  .bg {
+    width: 138% !important;
+    height: 129% !important;
+    bottom: -24px;
+    position: absolute;
   }
 `;

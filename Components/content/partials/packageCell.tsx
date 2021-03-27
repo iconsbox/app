@@ -1,11 +1,11 @@
-import React, {useMemo, useState} from 'react';
-import { StyledPackageCard } from '../styles';
-import {useRecoilValue} from "recoil";
-import Marquee from "react-smooth-marquee"
+import React, { useMemo, useState } from "react";
+import { StyledPackageCard } from "../styles";
+import { useRecoilValue } from "recoil";
+import Marquee from "react-smooth-marquee";
 
 import Image from "../../../Components/Image";
-import {pickIcons, makeFilePath} from "../../../Helpers";
-import {packagesState} from "../../../Recoil/atoms";
+import { pickIcons, makeFilePath } from "../../../Helpers";
+import { packagesState } from "../../../Recoil/atoms";
 
 const PackageCell = ({ pack, title, activePackage, onClick }) => {
   const iconsMarqueeSize = 12;
@@ -17,7 +17,7 @@ const PackageCell = ({ pack, title, activePackage, onClick }) => {
   // const marqueeRef = useRef(null);
   const currentPackage = packages[title];
 
-  if(!currentPackage) {
+  if (!currentPackage) {
     return null;
   }
 
@@ -25,7 +25,10 @@ const PackageCell = ({ pack, title, activePackage, onClick }) => {
     currentPackage,
     title,
   });
-  const icons = useMemo(() => pickIcons(Object.keys(currentPackage?.icons), iconsMarqueeSize), []);
+  const icons = useMemo(
+    () => pickIcons(Object.keys(currentPackage?.icons), iconsMarqueeSize),
+    []
+  );
   const handleSpeedUp = () => {
     setVelocity(hoverSpeed);
   };
@@ -36,21 +39,25 @@ const PackageCell = ({ pack, title, activePackage, onClick }) => {
     setVelocity(defaultSpeed);
   };
 
-  return <StyledPackageCard
-    onMouseEnter={handleSpeedUp}
-    onMouseLeave={handleSpeedDown}
-    height={2}
-    width={1}
-    onClick={onClick}
-    className={activePackage === pack ? 'active': ''}
-  >
-    <div className={`icon-holder ${!velocity ? 'stop' : ''}`}>
-      <Marquee velocity={velocity}>
-        {icons.map(icon => <Image url={makeFilePath(pack, icon)} alt={icon} />)}
-      </Marquee>
-    </div>
-    {title}
-  </StyledPackageCard>;
+  return (
+    <StyledPackageCard
+      onMouseEnter={handleSpeedUp}
+      onMouseLeave={handleSpeedDown}
+      height={2}
+      width={1}
+      onClick={onClick}
+      className={activePackage === pack ? "active" : ""}
+    >
+      <div className={`icon-holder ${!velocity ? "stop" : ""}`}>
+        <Marquee velocity={velocity}>
+          {icons.map((icon) => (
+            <Image url={makeFilePath(pack, icon)} alt={icon} />
+          ))}
+        </Marquee>
+      </div>
+      {title}
+    </StyledPackageCard>
+  );
 };
 
 export default PackageCell;

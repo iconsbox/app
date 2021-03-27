@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import {Cell, Grid} from "styled-css-grid";
+import styled from "styled-components";
+import { Cell, Grid } from "styled-css-grid";
 
 export const StyledContent = styled.div`
   background: #f8f8f8;
-  height: 100%;
+  min-height: 100%;
 `;
 
 export const StyledHeadbar = styled(Grid)`
-  padding: 16px;
+  padding: 4px 16px;
 
   h3 {
     display: inline-block;
@@ -57,8 +57,14 @@ export const StyledSearchBox = styled.div`
   font-size: 12px;
   position: relative;
   bottom: -10px;
+  white-space: nowrap;
+  padding-left: 32px;
+  overflow: hidden;
+
   svg {
-    margin-right: 10px
+    margin-right: 10px;
+    position: absolute;
+    left: 10px;
   }
 `;
 
@@ -107,7 +113,7 @@ export const StyledPackageCard = styled(Cell)`
       transform: unset !important;
       padding-left: 35px;
     }
-    
+
     img {
       width: 24px !important;
       height: 24px !important;
@@ -154,7 +160,7 @@ export const StyledPackageInfo = styled.div`
     padding: 12px 10px;
     font-size: 11px;
     font-weight: 400;
-    box-shadow: 0 2px 5px -2px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.4);
     top: -3px;
     span {
       display: block;
@@ -168,8 +174,12 @@ export const StyledPackageInfo = styled.div`
   }
 `;
 
-export const StyledPackageIconsGrid = styled(Grid)`
-
+export const StyledPackageIcons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 10px;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const StyledEmptyPackagesList = styled.div`

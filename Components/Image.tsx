@@ -5,7 +5,10 @@ const Image = ({ url, alt }) => {
     useSuspense: false,
     srcList: url,
   });
-  return <img className={image.isLoading ? 'loading' : ''} src={url} alt={alt} />
+
+  return (
+    <img className={image.isLoading ? "loading" : ""} src={url} alt={alt} />
+  );
 };
 
 export default Image;

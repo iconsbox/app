@@ -1,8 +1,8 @@
-import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {activePackageState, packagesState} from '../../../Recoil/atoms'
-import PackageCell from './packageCell';
-import { StyledChoosePackageGrid } from '../styles';
+import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { activePackageState, packagesState } from "../../../Recoil/atoms";
+import PackageCell from "./packageCell";
+import { StyledChoosePackageGrid } from "../styles";
 
 const ChoosePackage = () => {
   const [activePackage, setActivePackage] = useRecoilState(activePackageState);
@@ -10,23 +10,26 @@ const ChoosePackage = () => {
 
   console.log({
     activePackage,
-    packages
+    packages,
   });
-  const handleChoosePackage = pack => () => {
+  const handleChoosePackage = (pack) => () => {
     setActivePackage(pack);
   };
 
   return (
     <StyledChoosePackageGrid className="noselect" columns={7}>
-      {Object.keys(packages).map(pack => {
+      {Object.keys(packages).map((pack) => {
         return (
           <PackageCell
             pack={pack}
             onClick={handleChoosePackage(pack)}
-            title={pack.replace(/Icons|icons/g, '').replace(/FontAwesome/, 'Awesome').replace('Snappmarket', 'custom')}
+            title={pack
+              .replace(/Icons|icons/g, "")
+              .replace(/FontAwesome/, "Awesome")
+              .replace("Snappmarket", "custom")}
             activePackage={activePackage}
           />
-        )
+        );
       })}
     </StyledChoosePackageGrid>
   );
