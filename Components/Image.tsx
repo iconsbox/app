@@ -1,6 +1,11 @@
 import { useImage } from "react-image";
 
-const Image = ({ url, alt }) => {
+type Props = {
+  url: string;
+  alt: string;
+};
+
+const Image = ({ url, alt }: Props) => {
   const image = useImage({
     useSuspense: false,
     srcList: url,

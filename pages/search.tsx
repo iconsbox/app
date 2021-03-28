@@ -10,7 +10,6 @@ import useCurrentBreakpoint from "../Helpers/useCurrentBreakpoint";
 import Sidebar from "../Components/sidebar";
 import Content from "../Components/content";
 import LogoCube from "../Components/LogoCube/LogoCube";
-import Panel from "../Components/panel";
 import {
   StyledContainer,
   StyledAppMain,
@@ -38,12 +37,12 @@ export default function Home() {
   return (
     <StyledContainer>
       <Head>
-        <title>Iconbox App - v2.1.2</title>
+        <title>Search | Iconbox App - v2.1.2</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledAppMain>
         {!isLoading && (
-          <Grid columns={17} gap={0} alignContent="stretch">
+          <Grid columns={17} alignContent="stretch">
             <StyledSidebarCell
               className={isMobile ? "isMobile" : ""}
               width={isMobile ? 1 : 3}
@@ -58,9 +57,6 @@ export default function Home() {
             >
               <Content />
             </StyledContentCell>
-            {/* <Cell width={7} height={1}> */}
-            {/*  <Panel/> */}
-            {/* </Cell> */}
           </Grid>
         )}
 

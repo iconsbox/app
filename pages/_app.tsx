@@ -1,8 +1,16 @@
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import "../styles/globals.css";
+import { Component } from "react";
 
-function MyApp({ Component, pageProps }) {
+type Props = {
+  Component: typeof Component;
+  pageProps: {
+    [name: string]: any;
+  };
+};
+
+function MyApp({ Component, pageProps }: Props) {
   const theme = {};
   return (
     <RecoilRoot>

@@ -32,7 +32,7 @@ function LogoCube({
         setSlide(1);
       }
     }, timeout);
-  }, [slide]);
+  }, [slide, withDelay]);
 
   return (
     <StyledLogoCube
@@ -43,8 +43,16 @@ function LogoCube({
         <StyledCubeFigure className="front">Icon</StyledCubeFigure>
         <StyledCubeFigure className="back" />
         <StyledCubeFigure className="right">Box</StyledCubeFigure>
-        <StyledCubeFigure className="left">🥰</StyledCubeFigure>
-        <StyledCubeFigure className="top">😉</StyledCubeFigure>
+        <StyledCubeFigure className="left">
+          <span aria-label="love" role="img">
+            🥰
+          </span>
+        </StyledCubeFigure>
+        <StyledCubeFigure className="top">
+          <span aria-label="yeah" role="img">
+            😉
+          </span>
+        </StyledCubeFigure>
         <StyledCubeFigure className="bottom" />
       </StyledCube>
     </StyledLogoCube>

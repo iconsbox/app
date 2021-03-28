@@ -3,7 +3,12 @@ import { StyledCard } from "./styles";
 import { makeFilePath } from "../../../Helpers";
 import Image from "../../Image";
 
-const IconCard = ({ icon, pack }) => {
+type Props = {
+  icon: string;
+  pack: string;
+};
+
+const IconCard = ({ icon, pack }: Props) => {
   const imageUrl = makeFilePath(pack, icon);
   return (
     <StyledCard key={imageUrl}>

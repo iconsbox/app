@@ -3,16 +3,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { activePackageState, packagesState } from "../../../Recoil/atoms";
 import PackageCell from "./packageCell";
 import { StyledChoosePackageGrid } from "../styles";
+import { Packages } from "../../../Helpers";
 
 const ChoosePackage = () => {
   const [activePackage, setActivePackage] = useRecoilState(activePackageState);
-  const packages = useRecoilValue(packagesState);
+  const packages = useRecoilValue<Packages>(packagesState);
 
-  console.log({
-    activePackage,
-    packages,
-  });
-  const handleChoosePackage = (pack) => () => {
+  const handleChoosePackage = (pack: string) => () => {
     setActivePackage(pack);
   };
 
@@ -21,6 +18,7 @@ const ChoosePackage = () => {
       {Object.keys(packages).map((pack) => {
         return (
           <PackageCell
+            key={pack}
             pack={pack}
             onClick={handleChoosePackage(pack)}
             title={pack
