@@ -14,3 +14,8 @@ export const activePackageState = atom({
   key: "activePackage",
   default: "",
 });
+
+export const pageResetState = atom({
+  key: "pageReset",
+  default: false,
+});

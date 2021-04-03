@@ -40,4 +40,10 @@ export const StyledContentCell = styled(Cell)`
     min-height: calc(100vh - 76px);
     max-height: calc(100vh - 76px);
   }
+
+  .loading {
+    z-index: 9999;
+    bottom: 19px;
+    left: 50%;
+  }
 `;

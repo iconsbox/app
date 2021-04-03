@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, RefObject } from "react";
 import { Search3Icon } from "@iconbox/iconly";
 import { Cell } from "styled-css-grid";
-import { useRecoilValue } from "recoil";
-import useDidUpdateEffect from "../../Helpers/useDidUpdateEffect";
+import { useRecoilState, useRecoilValue } from "recoil";
 import ChoosePackage from "./partials/choosePackage";
 import PackageIcons from "./partials/packageIcons";
 import {
@@ -11,48 +10,55 @@ import {
   StyledSearchBox,
   StyledPackageInfo,
   StyledEmptyPackagesList,
+  StyledLoading,
 } from "./styles";
-import { activePackageState, packagesState } from "../../Recoil/atoms";
-import useInfiniteScroll from "react-infinite-scroll-hook";
+import {
+  activePackageState,
+  packagesState,
+  pageResetState,
+} from "../../Recoil/atoms";
 import { paginate, Package, Packages } from "../../Helpers";
+import useElementScroll from "../../Helpers/useElementScroll";
 
 const COUNT_PER_PAGE = 25;
 
-const Content = () => {
+const Content = ({
+  scrollerRef,
+}: {
+  scrollerRef: RefObject<HTMLDivElement | undefined>;
+}) => {
   const packages = useRecoilValue<Packages>(packagesState);
   const activePackage = useRecoilValue<string>(activePackageState);
-  const [page, setPage] = useState(0);
-  const [hasNextPage, setHasNextPage] = useState(true);
+  const [resetPages, setResetPages] = useRecoilState<boolean>(pageResetState);
   const currentPackage: Package = packages[activePackage];
   const allIcons = Object.keys(currentPackage?.icons || {});
-  const [icons, setIcons] = useState<string[]>();
+  const [icons, setIcons] = useState<string[]>([]);
+  const [page, setPage] = useState(0);
 
-  useDidUpdateEffect(() => {
-    console.log("Page changes");
-    setIcons(paginate(allIcons, 25, page));
+  const isLoading = allIcons.length > page * COUNT_PER_PAGE;
+  useElementScroll({
+    reference: scrollerRef,
+    callback() {
+      if (isLoading) {
+        setPage((page) => page + 1);
+      }
+    },
+  });
+
+  useEffect(() => {
+    const tempIcons = paginate(allIcons, COUNT_PER_PAGE, page + 1);
+    if (page > 0 && !resetPages) {
+      setIcons([...icons, ...tempIcons]);
+    } else {
+      setPage(0);
+      setResetPages(false);
+      setIcons(tempIcons);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(currentPackage), page]);
 
-  console.log("allIcons.length", allIcons);
-  const handleGetMoreIcons = () => {
-    console.log("Getting more icons ");
-    setPage(page + 1);
-    if (page * COUNT_PER_PAGE > allIcons.length) {
-      setHasNextPage(false);
-    }
-    if (!hasNextPage) {
-      setHasNextPage(true);
-    }
-  };
-  const infiniteRef = useInfiniteScroll<HTMLDivElement>({
-    loading: false,
-    hasNextPage: true,
-    onLoadMore: handleGetMoreIcons,
-    scrollContainer: "parent",
-  });
-
   return (
-    <StyledContent ref={infiniteRef}>
+    <StyledContent>
       <StyledHeadbar columns={7}>
         <Cell width={4} top={1}>
           <h3>
@@ -107,6 +113,8 @@ const Content = () => {
             </Cell>
           </StyledHeadbar>
           <PackageIcons icons={icons} />
+
+          {isLoading && <StyledLoading columns={1}>loading...</StyledLoading>}
         </>
       ) : (
         <StyledEmptyPackagesList>Choose pack ...</StyledEmptyPackagesList>

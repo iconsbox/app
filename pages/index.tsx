@@ -10,17 +10,18 @@ import useCurrentBreakpoint from "../Helpers/useCurrentBreakpoint";
 import Sidebar from "../Components/sidebar";
 import Content from "../Components/content";
 import LogoCube from "../Components/LogoCube/LogoCube";
-import Panel from "../Components/panel";
 import {
   StyledContainer,
   StyledAppMain,
   StyledSidebarCell,
   StyledContentCell,
 } from "./styles";
+import { useRef } from "react";
 
 export default function Home() {
   const setPackages = useSetRecoilState(packagesState);
   const currentBreakpoint = useCurrentBreakpoint();
+  const scrollerRef = useRef<HTMLDivElement>();
   const isMobile = currentBreakpoint === "mobile";
 
   const packagesDataUrl =
@@ -31,19 +32,21 @@ export default function Home() {
   });
   const isLoading = !error && !data;
 
-  if (!error && data) {
-    setPackages(JSON.parse(data.replace("export default", "")));
-  }
+  React.useEffect(() => {
+    if (!error && data) {
+      setPackages(JSON.parse(data.replace("export default", "")));
+    }
+  }, [data, error, setPackages]);
 
   return (
     <StyledContainer>
       <Head>
-        <title>Iconbox App - v2.1.2</title>
+        <title>Search | Iconbox App - v2.1.2</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledAppMain>
         {!isLoading && (
-          <Grid columns={17} gap={0} alignContent="stretch">
+          <Grid gap="0" columns={17} alignContent="stretch">
             <StyledSidebarCell
               className={isMobile ? "isMobile" : ""}
               width={isMobile ? 1 : 3}
@@ -55,12 +58,10 @@ export default function Home() {
               className={isMobile ? "isMobile" : ""}
               width={isMobile ? 17 : 14}
               height={1}
+              ref={scrollerRef}
             >
-              <Content />
+              <Content scrollerRef={scrollerRef} />
             </StyledContentCell>
-            {/* <Cell width={7} height={1}> */}
-            {/*  <Panel/> */}
-            {/* </Cell> */}
           </Grid>
         )}
 

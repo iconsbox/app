@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
-export const StyledLogoCube = styled.section<{ size: number }>`
+export const StyledLogoCube = styled.section<{
+  size: number;
+  color: string;
+  bg: string;
+}>`
   --size: ${({ size }: { size: number }) => size}px;
+  --color: ${({ color }: { color: string }) => color};
+  --bg: ${({ bg }: { bg: string }) => bg};
   width: var(--size);
   height: var(--size);
   -webkit-perspective: 1000px;
@@ -33,6 +39,9 @@ export const StyledLogoCube = styled.section<{ size: number }>`
     height: 90%;
     box-shadow: 0 24px 67px -9px rgb(0 0 0 / 77%);
     position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 
@@ -143,10 +152,10 @@ export const StyledCubeFigure = styled.figure`
   height: var(--size);
   line-height: var(--size);
   font-size: calc(var(--size) / 2.4);
-  color: #fff;
   text-align: center;
   margin: 0 !important;
   border-radius: 13px;
   overflow: hidden;
-  background: #303030;
+  background: var(--bg);
+  color: var(--color);
 `;

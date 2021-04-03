@@ -1,16 +1,22 @@
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { activePackageState, packagesState } from "../../../Recoil/atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  activePackageState,
+  packagesState,
+  pageResetState,
+} from "../../../Recoil/atoms";
 import PackageCell from "./packageCell";
-import { StyledChoosePackageGrid } from "../styles";
 import { Packages } from "../../../Helpers";
+import { StyledChoosePackageGrid } from "../styles";
 
 const ChoosePackage = () => {
   const [activePackage, setActivePackage] = useRecoilState(activePackageState);
   const packages = useRecoilValue<Packages>(packagesState);
+  const resetPages = useSetRecoilState(pageResetState);
 
   const handleChoosePackage = (pack: string) => () => {
     setActivePackage(pack);
+    resetPages(true);
   };
 
   return (

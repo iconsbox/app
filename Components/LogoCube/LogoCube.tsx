@@ -7,6 +7,8 @@ type Props = {
   fixed?: boolean;
   size?: number;
   className?: string;
+  bg?: string;
+  color?: string;
 };
 
 function LogoCube({
@@ -14,6 +16,8 @@ function LogoCube({
   fixed = true,
   size = 200,
   className = "",
+  bg = "#303030",
+  color = "#fff",
 }: Props) {
   const [slide, setSlide] = useState(1);
   const animateSlides = [0, 5, 4, 1, 3];
@@ -36,6 +40,8 @@ function LogoCube({
 
   return (
     <StyledLogoCube
+      bg={bg}
+      color={color}
       className={`${fixed ? "fixed" : ""} ${className}`}
       size={size}
     >

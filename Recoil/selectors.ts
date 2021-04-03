@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import { packagesState, activePackageState } from "./atoms";
+import { packagesState, activePackageState, pageState } from "./atoms";
 
 export const packagesSelector = selector({
   key: "packages",
@@ -9,4 +9,9 @@ export const packagesSelector = selector({
 export const activePackageSelector = selector({
   key: "activePackage",
   get: ({ get }) => get(activePackageState),
+});
+
+export const pageSelector = selector({
+  key: "page",
+  get: ({ get }) => get(pageState),
 });

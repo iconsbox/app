@@ -191,3 +191,23 @@ export const StyledEmptyPackagesList = styled.div`
   font-weight: 600;
   color: #bfc0c5;
 `;
+
+export const StyledLoading = styled(Grid)`
+  z-index: 9999;
+  bottom: 0;
+  text-align: center;
+  height: 72px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.4);
+  padding-right: 55px;
+`;

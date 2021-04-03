@@ -16,10 +16,12 @@ import {
   StyledSidebarCell,
   StyledContentCell,
 } from "./styles";
+import { useRef } from "react";
 
 export default function Home() {
   const setPackages = useSetRecoilState(packagesState);
   const currentBreakpoint = useCurrentBreakpoint();
+  const scrollerRef = useRef<HTMLDivElement>();
   const isMobile = currentBreakpoint === "mobile";
 
   const packagesDataUrl =
@@ -30,9 +32,11 @@ export default function Home() {
   });
   const isLoading = !error && !data;
 
-  if (!error && data) {
-    setPackages(JSON.parse(data.replace("export default", "")));
-  }
+  React.useEffect(() => {
+    if (!error && data) {
+      setPackages(JSON.parse(data.replace("export default", "")));
+    }
+  }, [data, error, setPackages]);
 
   return (
     <StyledContainer>
@@ -42,7 +46,7 @@ export default function Home() {
       </Head>
       <StyledAppMain>
         {!isLoading && (
-          <Grid columns={17} alignContent="stretch">
+          <Grid gap="0" columns={17} alignContent="stretch">
             <StyledSidebarCell
               className={isMobile ? "isMobile" : ""}
               width={isMobile ? 1 : 3}
@@ -54,8 +58,11 @@ export default function Home() {
               className={isMobile ? "isMobile" : ""}
               width={isMobile ? 17 : 14}
               height={1}
+              ref={scrollerRef}
             >
-              <Content />
+              <Content scrollerRef={scrollerRef} />
+
+              <div>loading...</div>
             </StyledContentCell>
           </Grid>
         )}
