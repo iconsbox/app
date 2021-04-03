@@ -1,11 +1,12 @@
 import * as React from "react";
+import { useRef } from "react";
 import Head from "next/head";
 import { Grid } from "styled-css-grid";
 import useSWR from "swr";
-
 import { useSetRecoilState } from "recoil";
+
 import { packagesState } from "../Recoil/atoms";
-import { textFetcher as fetcher } from "../Helpers";
+import { textFetcher as fetcher, Packages } from "../Helpers";
 import useCurrentBreakpoint from "../Helpers/useCurrentBreakpoint";
 import Sidebar from "../Components/sidebar";
 import Content from "../Components/content";
@@ -15,11 +16,10 @@ import {
   StyledAppMain,
   StyledSidebarCell,
   StyledContentCell,
-} from "./styles";
-import { useRef } from "react";
+} from "../styles/global";
 
 export default function Home() {
-  const setPackages = useSetRecoilState(packagesState);
+  const setPackages = useSetRecoilState<Packages>(packagesState);
   const currentBreakpoint = useCurrentBreakpoint();
   const scrollerRef = useRef<HTMLDivElement>();
   const isMobile = currentBreakpoint === "mobile";
@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <StyledContainer>
       <Head>
-        <title>Search | Iconbox App - v2.1.2</title>
+        <title>Iconbox App - v2.1.2</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledAppMain>

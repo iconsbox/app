@@ -1,7 +1,7 @@
+import { Component } from "react";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import "../styles/globals.css";
-import { Component } from "react";
 
 type Props = {
   Component: typeof Component;

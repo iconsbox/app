@@ -47,3 +47,5 @@ export const StyledContentCell = styled(Cell)`
     left: 50%;
   }
 `;
+
+export default {};
