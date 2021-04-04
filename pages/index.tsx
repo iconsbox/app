@@ -1,16 +1,24 @@
-import * as React from "react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Head from "next/head";
 import { Grid } from "styled-css-grid";
 import useSWR from "swr";
 import { useSetRecoilState } from "recoil";
+import { useRouter } from "next/router";
 
-import { packagesState } from "../Recoil/atoms";
+import {
+  packagesState,
+  activePackageState,
+  activeIconState,
+} from "../Recoil/atoms";
 import { textFetcher as fetcher, Packages } from "../Helpers";
 import useCurrentBreakpoint from "../Helpers/useCurrentBreakpoint";
-import Sidebar from "../Components/sidebar";
-import Content from "../Components/content";
-import LogoCube from "../Components/LogoCube/LogoCube";
+import Sidebar from "../Components/layout/sidebar";
+import Home from "../Components/contents/home";
+import Search from "../Components/contents/search";
+import Donate from "../Components/contents/donate";
+import IconDetail from "../Components/contents/iconDetail";
+import Settings from "../Components/contents/settings";
+import LogoCube from "../Components/layout/LogoCube/LogoCube";
 import {
   StyledContainer,
   StyledAppMain,
@@ -18,25 +26,50 @@ import {
   StyledContentCell,
 } from "../styles/global";
 
-export default function Home() {
+function Main() {
   const setPackages = useSetRecoilState<Packages>(packagesState);
+  const setActivePackage = useSetRecoilState<string>(activePackageState);
+  const setActiveIcon = useSetRecoilState<string>(activeIconState);
   const currentBreakpoint = useCurrentBreakpoint();
   const scrollerRef = useRef<HTMLDivElement>();
+  const router = useRouter();
   const isMobile = currentBreakpoint === "mobile";
+  const page = (router.query.page as string) || "home";
+  const currentPackage = (router.query.package as string) || "";
+  const activeIcon = (router.query.icon as string) || "";
 
-  const packagesDataUrl =
-    "https://raw.githubusercontent.com/iconsbox/icons/master/app/data.js";
-  const { data, error } = useSWR(packagesDataUrl, fetcher, {
-    errorRetryCount: 3,
-    errorRetryInterval: 2000,
-  });
+  // Initial states
+  useEffect(() => {
+    setActivePackage(currentPackage);
+  }, [currentPackage, setActivePackage]);
+
+  useEffect(() => {
+    setActiveIcon(activeIcon);
+  }, [activeIcon, setActiveIcon]);
+
+  const { data, error } = useSWR(
+    "https://raw.githubusercontent.com/iconsbox/icons/master/app/data.js",
+    fetcher,
+    {
+      errorRetryCount: 3,
+      errorRetryInterval: 2000,
+    }
+  );
   const isLoading = !error && !data;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!error && data) {
       setPackages(JSON.parse(data.replace("export default", "")));
     }
   }, [data, error, setPackages]);
+
+  const lookupPages: { [name: string]: any } = {
+    home: Home,
+    search: Search,
+    donate: Donate,
+    settings: Settings,
+  };
+  const Content = lookupPages[page] || Home;
 
   return (
     <StyledContainer>
@@ -52,7 +85,7 @@ export default function Home() {
               width={isMobile ? 1 : 3}
               height={1}
             >
-              <Sidebar />
+              <Sidebar page={page} />
             </StyledSidebarCell>
             <StyledContentCell
               className={isMobile ? "isMobile" : ""}
@@ -61,6 +94,8 @@ export default function Home() {
               ref={scrollerRef}
             >
               <Content scrollerRef={scrollerRef} />
+
+              {Boolean(activeIcon) && <IconDetail />}
             </StyledContentCell>
           </Grid>
         )}
@@ -75,3 +110,5 @@ export default function Home() {
     </StyledContainer>
   );
 }
+
+export default Main;

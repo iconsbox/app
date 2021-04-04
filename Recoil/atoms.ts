@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const fontIconPanelState = atom({
+export const favoritePanelState = atom({
   key: "fontIconPanel",
   default: false,
 });
@@ -12,6 +12,11 @@ export const packagesState = atom({
 
 export const activePackageState = atom({
   key: "activePackage",
+  default: "",
+});
+
+export const activeIconState = atom({
+  key: "activeIcon",
   default: "",
 });
 

@@ -2,13 +2,10 @@ import React, { useEffect, useState, RefObject } from "react";
 import { Search3Icon } from "@iconbox/iconly";
 import { Cell } from "styled-css-grid";
 import { useRecoilState, useRecoilValue } from "recoil";
-import ChoosePackage from "./partials/choosePackage";
-import PackageIcons from "./partials/packageIcons";
 import {
-  StyledHeadbar,
+  StyledHeadBar,
   StyledContent,
   StyledSearchBox,
-  StyledPackageInfo,
   StyledEmptyPackagesList,
   StyledLoading,
 } from "./styles";
@@ -16,9 +13,9 @@ import {
   activePackageState,
   packagesState,
   pageResetState,
-} from "../../Recoil/atoms";
-import { paginate, Package, Packages } from "../../Helpers";
-import useElementScroll from "../../Helpers/useElementScroll";
+} from "../../../Recoil/atoms";
+import { paginate, Package, Packages } from "../../../Helpers";
+import useElementScroll from "../../../Helpers/useElementScroll";
 
 const COUNT_PER_PAGE = 25;
 
@@ -59,65 +56,38 @@ const Content = ({
 
   return (
     <StyledContent>
-      <StyledHeadbar columns={7}>
+      <StyledHeadBar columns={7}>
         <Cell width={4} top={1}>
           <h3>
-            Choose <strong>package</strong>
+            Search <strong>icon</strong>
           </h3>
         </Cell>
-        <Cell width={3} top={1}>
-          <StyledSearchBox className="noselect">
-            <Search3Icon />
-            Search for icons
-          </StyledSearchBox>
-        </Cell>
-      </StyledHeadbar>
-      <ChoosePackage />
+      </StyledHeadBar>
+
+      <StyledSearchBox className="noselect">
+        <Search3Icon />
+        Search for icons
+      </StyledSearchBox>
 
       {currentPackage ? (
         <>
-          <StyledHeadbar columns={3}>
+          <StyledHeadBar columns={3}>
             <Cell width={2} top={1}>
-              <h3>{activePackage}</h3>
+              <h3>Search results for "Keyword"</h3>
               <span className="label">
                 {Object.keys(currentPackage.icons).length}+
               </span>
               <span className="version">v{currentPackage.version}</span>
             </Cell>
             <Cell width={1} top={1}>
-              <StyledPackageInfo className="noselect">
-                ...
-                {/*<div className="tooltip">*/}
-                {/*  {currentPackage.license ? (*/}
-                {/*    <>*/}
-                {/*      Licence:*/}
-                {/*      <strong>{currentPackage.license}</strong>*/}
-                {/*      <br />*/}
-                {/*      <br />*/}
-                {/*    </>*/}
-                {/*  ) : (*/}
-                {/*    ""*/}
-                {/*  )}*/}
-                {/*  <span>*/}
-                {/*    All right reserved to{" "}*/}
-                {/*    <a*/}
-                {/*      href={currentPackage.owner.url || ""}*/}
-                {/*      target="_blank"*/}
-                {/*      rel="noreferrer"*/}
-                {/*    >*/}
-                {/*      {currentPackage.owner.name}*/}
-                {/*    </a>*/}
-                {/*  </span>*/}
-                {/*</div>*/}
-              </StyledPackageInfo>
+              results
             </Cell>
-          </StyledHeadbar>
-          <PackageIcons icons={icons} />
+          </StyledHeadBar>
 
           {isLoading && <StyledLoading columns={1}>loading...</StyledLoading>}
         </>
       ) : (
-        <StyledEmptyPackagesList>Choose pack ...</StyledEmptyPackagesList>
+        <StyledEmptyPackagesList>Enter keyword ...</StyledEmptyPackagesList>
       )}
     </StyledContent>
   );

@@ -1,4 +1,4 @@
-import { chooseRandom } from "../../Helpers";
+import { chooseRandom } from "../../../Helpers";
 
 const BackgroundSvg = () => {
   const backgrounds = [

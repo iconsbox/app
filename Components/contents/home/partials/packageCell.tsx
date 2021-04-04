@@ -1,11 +1,15 @@
 import React, { useMemo, useState } from "react";
-import { StyledPackageCard } from "../styles";
 import { useRecoilValue } from "recoil";
 import Marquee from "react-smooth-marquee";
-
-import Image from "../../../Components/Image";
-import { pickIcons, makeFilePath, Package, Packages } from "../../../Helpers";
-import { packagesState } from "../../../Recoil/atoms";
+import Image from "../../../Image";
+import {
+  pickIcons,
+  makeFilePath,
+  Package,
+  Packages,
+} from "../../../../Helpers";
+import { packagesState } from "../../../../Recoil/atoms";
+import { StyledPackageCard } from "../styles";
 
 type Props = {
   pack: string;
@@ -19,9 +23,7 @@ const PackageCell = ({ pack, title, activePackage, onClick }: Props) => {
   const defaultSpeed = 0;
   const hoverSpeed = 0.1;
   const [velocity, setVelocity] = useState(defaultSpeed);
-  // const [currentTransform, setCurrentTransform] = useState('unset');
   const packages = useRecoilValue<Packages>(packagesState);
-  // const marqueeRef = useRef(null);
   const currentPackage: Package = packages[title];
   const icons = useMemo(
     () => pickIcons(Object.keys(currentPackage?.icons || {}), iconsMarqueeSize),

@@ -38,10 +38,10 @@ export const StyledMenuItem = styled.div`
   color: #bfc0c5;
   cursor: pointer;
   &.active {
+    color: #fff;
     * {
       position: absolute;
     }
-    color: #fff;
     .menuIcon {
       color: #fff;
       z-index: 98;
@@ -57,6 +57,11 @@ export const StyledMenuItem = styled.div`
     width: 32px !important;
     height: 32px !important;
     margin-bottom: 8px;
+    will-change: transform;
+    animation-name: scaleIn;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.13, 0.82, 0.25, 1);
   }
   &.isMobile {
     margin: 5px 10px;
@@ -67,5 +72,14 @@ export const StyledMenuItem = styled.div`
     height: 129% !important;
     bottom: -24px;
     position: absolute;
+  }
+
+  @keyframes scaleIn {
+    0% {
+      transform: scale(0.7);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 `;

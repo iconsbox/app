@@ -6,7 +6,7 @@ export const StyledContent = styled.div`
   min-height: 100%;
 `;
 
-export const StyledHeadbar = styled(Grid)`
+export const StyledHeadBar = styled(Grid)`
   padding: 4px 16px;
 
   h3 {
@@ -60,6 +60,7 @@ export const StyledSearchBox = styled.div`
   white-space: nowrap;
   padding-left: 32px;
   overflow: hidden;
+  cursor: pointer;
 
   svg {
     margin-right: 10px;
@@ -210,4 +211,19 @@ export const StyledLoading = styled(Grid)`
   font-weight: 900;
   color: rgba(0, 0, 0, 0.4);
   padding-right: 55px;
+`;
+
+export const StyledNotFound = styled.div`
+  margin: auto 2%;
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+  svg {
+    margin-right: 0.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    position: relative;
+    bottom: -0.4rem;
+  }
 `;

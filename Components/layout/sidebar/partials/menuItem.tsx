@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { StyledMenuItem } from "../styles";
-import useCurrentBreakpoint from "../../../Helpers/useCurrentBreakpoint";
+import useCurrentBreakpoint from "../../../../Helpers/useCurrentBreakpoint";
 import BackgroundSvg from "../backgroundSvg";
 
 type Props = {

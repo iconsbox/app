@@ -12,3 +12,8 @@ export type Package = {
 };
 
 export type Packages = { [name: string]: Package };
+
+export type LocalStorageSavedItem = {
+  icon: string;
+  pack: string;
+};

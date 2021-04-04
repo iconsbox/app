@@ -1,4 +1,5 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Cell } from "styled-css-grid";
 import {
   Home3Icon,
@@ -8,7 +9,7 @@ import {
 } from "@iconbox/iconly";
 import MenuItem from "./partials/menuItem";
 import { StyledSidebarGrid, StyledMenuItemCell } from "./styles";
-import useCurrentBreakpoint from "../../Helpers/useCurrentBreakpoint";
+import useCurrentBreakpoint from "../../../Helpers/useCurrentBreakpoint";
 
 type MenuItem = {
   title: string;
@@ -16,10 +17,16 @@ type MenuItem = {
   position: number;
 };
 
-const Index = () => {
-  const [activeMenu, setActiveMenu] = useState("Home");
+const Sidebar = ({ page }: { page: string }) => {
+  const [activeMenu, setActiveMenu] = useState(page);
   const currentBreakpoint = useCurrentBreakpoint();
+  const router = useRouter();
+
   const isMobile = currentBreakpoint === "mobile";
+
+  useEffect(() => {
+    setActiveMenu(page);
+  }, [page]);
 
   const menus: MenuItem[] = [
     {
@@ -38,14 +45,16 @@ const Index = () => {
       position: 12,
     },
     {
-      title: "Setting",
+      title: "Settings",
       icon: <Setting3Icon className="menuIcon" />,
       position: 15,
     },
   ];
 
-  const handleMenuClick = (menu: MenuItem) => () => {
-    setActiveMenu(menu.title);
+  const handleMenuClick = (menu: MenuItem) => async () => {
+    const page = menu.title.toLowerCase();
+    setActiveMenu(page);
+    await router.push(`/?page=${page}`);
   };
 
   return (
@@ -54,6 +63,7 @@ const Index = () => {
       rows={isMobile ? 1 : 25}
       columns={isMobile ? 4 : 1}
       gap={isMobile ? "0" : "8px"}
+      className="noselect"
     >
       {!isMobile && (
         <Cell
@@ -78,7 +88,7 @@ const Index = () => {
             onClick={handleMenuClick(menu)}
             title={menu.title}
             icon={menu.icon}
-            active={menu.title === activeMenu}
+            active={menu.title.toLowerCase() === activeMenu}
           />
         </StyledMenuItemCell>
       ))}
@@ -97,4 +107,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Sidebar;
