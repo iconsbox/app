@@ -15,7 +15,7 @@ const Settings = () => {
 
       <StyledForm>
         packages order - list icons size - default color - download action -
-        copy action -
+        copy action - language - dark mode
       </StyledForm>
     </StyledContent>
   );

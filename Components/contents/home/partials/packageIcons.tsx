@@ -4,10 +4,14 @@ import IconCard from "./iconCard";
 import { LocalStorageSavedItem, LOCALSTORAGE_NAME } from "../../../../Helpers";
 import { StyledPackageIcons } from "../styles";
 
-type Props = { icons: string[] | undefined };
+type Props = {
+  icons: string[] | undefined;
+  passedPackage?: string;
+};
 
-const PackageIcons = ({ icons }: Props) => {
-  const activePackage = useRecoilValue(activePackageState);
+const PackageIcons = ({ passedPackage, icons }: Props) => {
+  const recoilPackage = useRecoilValue(activePackageState);
+  const activePackage = passedPackage || recoilPackage;
 
   const savedFavIcons = localStorage.getItem(LOCALSTORAGE_NAME) || "[]";
   const favIcons: LocalStorageSavedItem[] = JSON.parse(savedFavIcons);

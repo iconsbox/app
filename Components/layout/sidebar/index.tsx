@@ -40,7 +40,7 @@ const Sidebar = ({ page }: { page: string }) => {
       position: 9,
     },
     {
-      title: "Donate",
+      title: "Favorites",
       icon: <Heart3Icon className="menuIcon" />,
       position: 12,
     },

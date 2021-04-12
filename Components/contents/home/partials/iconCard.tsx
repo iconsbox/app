@@ -55,7 +55,6 @@ const IconCard = ({ icon, pack, isFavorite }: Props) => {
         role="button"
       />
       <Image
-        className="noselect"
         role="button"
         onClick={handleShowIcon}
         key={imageUrl}

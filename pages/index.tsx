@@ -19,6 +19,7 @@ import Donate from "../Components/contents/donate";
 import IconDetail from "../Components/contents/iconDetail";
 import Settings from "../Components/contents/settings";
 import LogoCube from "../Components/layout/LogoCube/LogoCube";
+import Favorites from "../Components/contents/favorites";
 import {
   StyledContainer,
   StyledAppMain,
@@ -66,6 +67,7 @@ function Main() {
   const lookupPages: { [name: string]: any } = {
     home: Home,
     search: Search,
+    favorites: Favorites,
     donate: Donate,
     settings: Settings,
   };

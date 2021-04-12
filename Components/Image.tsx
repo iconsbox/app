@@ -14,7 +14,7 @@ const Image = ({ url, alt, ...rest }: Props) => {
 
   return (
     <img
-      className={image.isLoading ? "loading" : ""}
+      className={`${image.isLoading ? "loading" : ""} noselect`}
       src={url}
       alt={alt}
       {...rest}

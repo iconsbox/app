@@ -1,3 +1,4 @@
+import { SYNONYM_WORDS } from "./constants";
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 export function chooseWeighted(items: any[], chances: number[]) {
@@ -50,4 +51,24 @@ export const paginate = (
   page_number: number
 ): any[] => {
   return array.slice((page_number - 1) * page_size, page_number * page_size);
+};
+
+export const getSynonyms = (word: string) => {
+  let words: string[] = [];
+  SYNONYM_WORDS.forEach((s) => {
+    if (s.some((r) => r.startsWith(word))) {
+      words = words.concat(s);
+    }
+  });
+
+  return words;
+};
+
+export const getMultiSynonyms = (wordsArray: string[]) => {
+  let words: string[] = [];
+  wordsArray.forEach((word) => {
+    words = words.concat(getSynonyms(word));
+  });
+
+  return words;
 };
