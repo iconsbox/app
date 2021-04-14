@@ -20,6 +20,7 @@
     "react-image": "^4.0.3",
     "react-modal": "^3.12.1",
     "react-smooth-marquee": "^1.0.0",
+    "react-tabs": "^3.2.2",
     "recoil": "^0.1.2",
     "styled-components": "^5.2.1",
     "styled-css-grid": "^1.2.1",

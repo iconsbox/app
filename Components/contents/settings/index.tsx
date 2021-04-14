@@ -14,8 +14,8 @@ const Settings = () => {
       </StyledHeadBar>
 
       <StyledForm>
-        packages order - list icons size - default color - download action -
-        copy action - language - dark mode
+        list icons size - default color - download action - copy action -
+        language - dark mode - stop animations - drag&drop functionality
       </StyledForm>
     </StyledContent>
   );

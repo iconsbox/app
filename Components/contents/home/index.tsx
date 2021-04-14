@@ -64,7 +64,11 @@ const Content = ({ scrollerRef }: Props) => {
   }, [JSON.stringify(currentPackage), page]);
 
   return (
-    <StyledContent>
+    <StyledContent
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <StyledHeadbar columns={7}>
         <Cell width={4} top={1}>
           <h3>

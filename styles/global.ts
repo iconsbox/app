@@ -29,6 +29,7 @@ export const StyledSidebarCell = styled(Cell)`
     height: 76px;
     z-index: 99;
     background: #fff;
+    box-shadow: -2px 0 17px 10px rgb(0 0 0 / 2%);
   }
 `;
 

@@ -26,6 +26,7 @@ import {
   StyledSidebarCell,
   StyledContentCell,
 } from "../styles/global";
+import { AnimatePresence } from "framer-motion";
 
 function Main() {
   const setPackages = useSetRecoilState<Packages>(packagesState);
@@ -95,8 +96,9 @@ function Main() {
               height={1}
               ref={scrollerRef}
             >
-              <Content scrollerRef={scrollerRef} />
-
+              <AnimatePresence>
+                <Content scrollerRef={scrollerRef} />
+              </AnimatePresence>
               {Boolean(activeIcon) && <IconDetail />}
             </StyledContentCell>
           </Grid>

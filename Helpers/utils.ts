@@ -1,4 +1,5 @@
 import { SYNONYM_WORDS } from "./constants";
+import exp from "constants";
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 export function chooseWeighted(items: any[], chances: number[]) {
@@ -72,3 +73,10 @@ export const getMultiSynonyms = (wordsArray: string[]) => {
 
   return words;
 };
+
+export const makeSvgPath = (pack: string, icon: string) =>
+  `import ${icon} from '${pack}/${icon}/index.svg';`;
+export const makeComponentPath = (pack: string, icon: string) =>
+  `import { ${icon} } from '${pack}';`;
+export const makeSpritePath = (pack: string, icon: string) =>
+  `import { ${icon} } from '${pack}/sprite';`;

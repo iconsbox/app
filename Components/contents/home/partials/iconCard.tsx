@@ -50,6 +50,7 @@ const IconCard = ({ icon, pack, isFavorite }: Props) => {
   return (
     <StyledCard key={imageUrl}>
       <Star2Icon
+        title="Mark as favorite"
         className={favorite ? "active" : ""}
         onClick={handleSetFavIcon}
         role="button"

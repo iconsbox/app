@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Cell } from "styled-css-grid";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
-import { Home3Icon } from "@iconbox/iconly";
-
-import { activeIconState } from "../../../Recoil/atoms";
+import { Home3Icon, Star2Icon } from "@iconbox/iconly";
+import useSWR from "swr";
+import { activeIconState, packagesState } from "../../../Recoil/atoms";
+import Usage from "./components/usage/usage";
 import {
   StyledIconWrapper,
   StyledIconHolder,
@@ -13,26 +14,41 @@ import {
   StyledContent,
   StyledColors,
   StyledKeywords,
+  StyledInfoItem,
 } from "./styles";
-import useSWR from "swr";
 import {
   textFetcher as fetcher,
   makeFilePath,
   getMultiSynonyms,
+  Packages,
+  Package,
+  LOCALSTORAGE_NAME,
+  LocalStorageSavedItem,
 } from "../../../Helpers";
+
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */
 
 const Icon = () => {
   const [color, setColor] = useState("");
   const [activeIcon, setActiveIcon] = useRecoilState(activeIconState);
   const router = useRouter();
   const page = (router.query.page as string) || "home";
-  const currentPackage = (router.query.package as string) || "";
+  const packages = useRecoilValue<Packages>(packagesState);
+  const currentPackageName = (router.query.package as string) || "";
+  const currentPackage: Package = packages[currentPackageName];
+
+  // fav icons
+  const savedFavIcons = localStorage.getItem(LOCALSTORAGE_NAME) || "[]";
+  const favIcons: LocalStorageSavedItem[] = JSON.parse(savedFavIcons);
+  const [favorite, setFavorite] = useState(
+    favIcons.some((i) => i.pack === currentPackageName && i.icon === activeIcon)
+  );
 
   /**
    * Get icon svg content
    */
-  const svgAddress = makeFilePath(currentPackage, activeIcon);
-  const { data, error } = useSWR(svgAddress, fetcher, {
+  const svgAddress = makeFilePath(currentPackageName, activeIcon);
+  const { data } = useSWR(svgAddress, fetcher, {
     errorRetryCount: 3,
     errorRetryInterval: 2000,
   });
@@ -54,24 +70,57 @@ const Icon = () => {
   const handleClose = (forceHome?: boolean) => async () => {
     setActiveIcon("");
     let query = `/?page=${forceHome ? "home" : page}`;
-    if (currentPackage) {
-      query += `&package=${currentPackage}`;
+    if (currentPackageName) {
+      query += `&package=${currentPackageName}`;
     }
     await router.push(query);
   };
 
+  /**
+   * Logic for adding icon to favorites
+   */
+  const handleSetFavIcon = () => {
+    const savedFavIcons = localStorage.getItem(LOCALSTORAGE_NAME) || "[]";
+    let favIcons: LocalStorageSavedItem[] = JSON.parse(savedFavIcons);
+
+    if (favorite) {
+      favIcons = favIcons.filter(
+        (i) => i.pack !== currentPackageName || i.icon !== activeIcon
+      );
+    } else {
+      favIcons.push({
+        pack: currentPackageName,
+        icon: activeIcon,
+      });
+    }
+
+    localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(favIcons));
+    setFavorite(!favorite);
+  };
+
+  if (!currentPackage) {
+    return "Loading...";
+  }
+
   return (
-    <StyledContent>
+    <StyledContent
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <StyledHeadBar columns={7}>
         <Cell width={4} top={1}>
           <StyledBreadcrumb>
-            <a className="homeIcon">
+            <a
+              role="button"
+              onClick={() => router.push("/")}
+              className="homeIcon"
+            >
               <Home3Icon />
             </a>
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
             <a role="button" onClick={handleClose(true)}>
               <h3>
-                Package:<strong>{currentPackage}</strong>
+                Package:<strong>{currentPackageName}</strong>
               </h3>
             </a>
             <h3>
@@ -92,50 +141,24 @@ const Icon = () => {
       </StyledHeadBar>
 
       <StyledIconWrapper columns={24}>
-        <Cell width={8} top={1}>
-          <StyledIconHolder
-            className={color}
-            dangerouslySetInnerHTML={{ __html: "" }}
-          />
-
-          <StyledColors>
-            <button
-              className="color gray"
-              onClick={handleColorChange("gray")}
+        <Cell className="icon-wrapper" width={8}>
+          <StyledIconHolder className={`${color} ${!data ? "loadingSvg" : ""}`}>
+            <span dangerouslySetInnerHTML={{ __html: data || "" }} />
+            <Star2Icon
+              title="Mark as favorite"
+              className={`starIcon ${favorite ? "active" : ""}`}
+              onClick={handleSetFavIcon}
+              role="button"
             />
-            <button className="color red" onClick={handleColorChange("red")} />
-            <button
-              className="color green"
-              onClick={handleColorChange("green")}
-            />
-            <button
-              className="color yellow"
-              onClick={handleColorChange("yellow")}
-            />
-            <button
-              className="color cyan"
-              onClick={handleColorChange("cyan")}
-            />
-            <button
-              className="color blue"
-              onClick={handleColorChange("blue")}
-            />
-            <button
-              className="color lime"
-              onClick={handleColorChange("lime")}
-            />
-            <button
-              className="color volcano"
-              onClick={handleColorChange("volcano")}
-            />
-          </StyledColors>
+          </StyledIconHolder>
 
           <a
-            id="download-svg"
-            href="#"
-            download="#"
+            role="button"
+            href={svgAddress}
+            download={activeIcon}
             target="_blank"
             className="button button-green"
+            rel="noreferrer"
           >
             <svg
               version="1.1"
@@ -151,61 +174,81 @@ const Icon = () => {
             </svg>
             Download svg
           </a>
-          <div className="icon-license">licence</div>
+          <div className="icon-license">
+            {currentPackage.license ? `${currentPackage.license} license,` : ""}{" "}
+            All rights reserved to{" "}
+            <a
+              href={currentPackage.owner?.url || ""}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {currentPackage.owner?.name}
+            </a>
+          </div>
         </Cell>
-        <Cell width={16} className="icons-info">
+        <Cell width={16} style={{ padding: "0 8px" }}>
           <h1 className="icon-name">{activeIcon}</h1>
           <div className="separator" />
-          <div className="info-item">
+          <StyledInfoItem>
             version:
-            <span className="package-version">1.0.1-alpha.1</span>
-          </div>
-          <div className="info-item">
+            <span className="package-version">{currentPackage.version}</span>
+          </StyledInfoItem>
+          <StyledInfoItem>
             package:
-            <span className="package-name1">@snappmarket/Eva</span>
-          </div>
-          <div className="info-item">
+            <span className="package-name1">{currentPackage.package}</span>
+          </StyledInfoItem>
+          <StyledInfoItem>
+            icons count:
+            <span className="package-name1">
+              {Object.keys(currentPackage.icons).length} icons
+            </span>
+          </StyledInfoItem>
+          <StyledInfoItem>
             keywords:
             <StyledKeywords>
               {iconKeywords.map((keyword: string) => (
                 <span key={keyword}>{keyword}</span>
               ))}
             </StyledKeywords>
-          </div>
-
+            <StyledColors>
+              <button
+                className="color gray"
+                onClick={handleColorChange("gray")}
+              />
+              <button
+                className="color red"
+                onClick={handleColorChange("red")}
+              />
+              <button
+                className="color green"
+                onClick={handleColorChange("green")}
+              />
+              <button
+                className="color yellow"
+                onClick={handleColorChange("yellow")}
+              />
+              <button
+                className="color cyan"
+                onClick={handleColorChange("cyan")}
+              />
+              <button
+                className="color blue"
+                onClick={handleColorChange("blue")}
+              />
+              <button
+                className="color lime"
+                onClick={handleColorChange("lime")}
+              />
+              <button
+                className="color volcano"
+                onClick={handleColorChange("volcano")}
+              />
+            </StyledColors>
+          </StyledInfoItem>
+        </Cell>
+        <Cell width={24}>
           <div className="separator" />
-          <div className="install-message">
-            At first you need to install{" "}
-            <span className="code package-name2">package/name</span> then use
-            one of this import ways :
-          </div>
-          <div className="icon-usage">
-            <div className="label">Component</div>
-            <input
-              type="text"
-              className="code componentImport"
-              value="import { Test } from '@iconbox/Snappmarket"
-              readOnly
-            />
-          </div>
-          <div className="icon-usage">
-            <div className="label">Sprite ✮</div>
-            <input
-              type="text"
-              className="code spriteImport"
-              value="import { Test } from '@iconbox/Snappmarket/sprite"
-              readOnly
-            />
-          </div>
-          <div className="icon-usage">
-            <div className="label">Svg icon</div>
-            <input
-              type="text"
-              className="code svgImport"
-              value="import Test from '@iconbox/Snappmarket/Test/index.svg"
-              readOnly
-            />
-          </div>
+          <Usage pack={currentPackage.package} icon={activeIcon} />
         </Cell>
       </StyledIconWrapper>
     </StyledContent>

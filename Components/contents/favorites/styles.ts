@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Grid } from "styled-css-grid";
+import { motion } from "framer-motion";
 
-export const StyledContent = styled.div`
+export const StyledContent = styled(motion.div)`
   background: #f8f8f8;
   min-height: 100%;
 `;
