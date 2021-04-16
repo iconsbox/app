@@ -15,7 +15,8 @@ const Settings = () => {
 
       <StyledForm>
         list icons size - default color - download action - copy action -
-        language - dark mode - stop animations - drag&drop functionality
+        language - dark mode - stop animations - drag&drop functionality -
+        packages order: alphabetical, icons count, popularity
       </StyledForm>
     </StyledContent>
   );

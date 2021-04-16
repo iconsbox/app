@@ -7,6 +7,15 @@ import useSWR from "swr";
 import { activeIconState, packagesState } from "../../../Recoil/atoms";
 import Usage from "./components/usage/usage";
 import {
+  textFetcher as fetcher,
+  makeFilePath,
+  getMultiSynonyms,
+  Packages,
+  Package,
+  LOCALSTORAGE_NAME,
+  LocalStorageSavedItem,
+} from "../../../Helpers";
+import {
   StyledIconWrapper,
   StyledIconHolder,
   StyledBreadcrumb,
@@ -16,15 +25,6 @@ import {
   StyledKeywords,
   StyledInfoItem,
 } from "./styles";
-import {
-  textFetcher as fetcher,
-  makeFilePath,
-  getMultiSynonyms,
-  Packages,
-  Package,
-  LOCALSTORAGE_NAME,
-  LocalStorageSavedItem,
-} from "../../../Helpers";
 
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */
 
@@ -63,6 +63,11 @@ const Icon = () => {
     ...getMultiSynonyms(iconNameSplit),
   ];
 
+  console.log({
+    activeIcon,
+    iconKeywords,
+  });
+
   const handleColorChange = (colorName: string) => () => {
     setColor(colorName);
   };
@@ -99,7 +104,7 @@ const Icon = () => {
   };
 
   if (!currentPackage) {
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (
@@ -206,9 +211,10 @@ const Icon = () => {
           <StyledInfoItem>
             keywords:
             <StyledKeywords>
-              {iconKeywords.map((keyword: string) => (
-                <span key={keyword}>{keyword}</span>
-              ))}
+              {activeIcon &&
+                iconKeywords.map((keyword: string) => (
+                  <span key={keyword}>{keyword}</span>
+                ))}
             </StyledKeywords>
             <StyledColors>
               <button
