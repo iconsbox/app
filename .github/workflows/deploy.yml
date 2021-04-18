@@ -26,8 +26,8 @@ jobs:
         run: yarn install --force
       - name: Build 🧩
         run: yarn run build:static
-          env:
-            CI: true
+        env:
+          CI: true
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
