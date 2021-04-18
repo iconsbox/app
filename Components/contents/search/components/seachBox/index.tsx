@@ -134,7 +134,7 @@ function SearchBox({ onSearch }: Props) {
 
         <StyledSearchButton className="button button-green" type="submit">
           <Search2Icon className="searchIcon" />
-          Search
+          <span>Search</span>
         </StyledSearchButton>
       </StyledSearchBox>
 

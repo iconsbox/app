@@ -91,6 +91,16 @@ export const StyledSearchButton = styled.button`
     height: 26px !important;
     opacity: 0.7;
   }
+
+  @media (max-width: 380px) {
+    min-width: 50px;
+    span {
+      display: none;
+    }
+    svg {
+      margin-right: 0;
+    }
+  }
 `;
 
 export const StyledFiltersWrapper = styled(motion.div)`
@@ -115,14 +125,17 @@ export const StyledFiltersWrapper = styled(motion.div)`
     margin: 0 6px;
     flex: 0 0 50%;
     color: #616060;
+    background: #fff;
   }
 
   @media (max-width: 440px) {
     display: flex;
     flex-direction: column;
     > div {
-      margin-left: 0;
+      margin-left: -5px;
       margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
 
       &:first-child {
         margin-top: 0;

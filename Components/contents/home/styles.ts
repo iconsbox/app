@@ -37,6 +37,15 @@ export const StyledHeadbar = styled(Grid)`
     top: -1px;
     font-weight: 300;
   }
+
+  @media (max-width: 384px) {
+    h3 {
+      font-size: 15px;
+      margin-bottom: 24px;
+      position: relative;
+      top: 4px;
+    }
+  }
 `;
 
 export const StyledChoosePackageGrid = styled(Grid)`

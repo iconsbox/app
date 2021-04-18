@@ -28,9 +28,9 @@ export const StyledSettingItemWrapper = styled(motion.div)`
   border-radius: 8px;
   color: #656565;
   display: flex;
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
-  padding: 15px 20px;
+  padding: 15px 12px;
   overflow: hidden;
   cursor: pointer;
   margin: 10px 12px 0 14px;
@@ -45,16 +45,15 @@ export const StyledSettingItemWrapper = styled(motion.div)`
     margin: 0 6px;
     flex: 0 0 50%;
     color: #616060;
-    max-width: 50%;
+    max-width: 45%;
     background: #fff;
   }
 `;
 
 export const StyledSettingItem = styled.div`
-  margin-left: 8px;
   flex: 0 0 50%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  max-width: 50%;
+  max-width: 55%;
 `;
