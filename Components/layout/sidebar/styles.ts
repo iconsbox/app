@@ -74,6 +74,13 @@ export const StyledMenuItem = styled.div`
     position: absolute;
   }
 
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   @keyframes scaleIn {
     0% {
       transform: scale(0.7);

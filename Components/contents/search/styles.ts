@@ -8,10 +8,17 @@ export const StyledContent = styled.div`
 
 export const StyledHeadBar = styled(Grid)`
   padding: 4px 22px;
+  display: flex;
+  align-items: center;
 
   h3 {
     display: inline-block;
     font-weight: 400;
+  }
+  p {
+    font-size: 11px;
+    margin-left: 10px;
+    color: #6f6f6f;
   }
   .label {
     background: #e73d3d;

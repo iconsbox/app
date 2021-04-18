@@ -73,6 +73,8 @@ export const StyledSearchBox = styled.div`
   padding-left: 32px;
   overflow: hidden;
   cursor: pointer;
+  max-width: 204px;
+  height: 40px;
 
   svg {
     margin-right: 10px;

@@ -39,18 +39,19 @@ export const StyledSettingItemWrapper = styled(motion.div)`
 
   select {
     padding: 6px 9px 6px 5px;
-    border: none;
-    box-shadow: 0 0 1px 1px rgb(0 0 0 / 8%);
+    border: 1px solid #e4e4e4;
+    box-shadow: none;
     border-radius: 3px;
     margin: 0 6px;
     flex: 0 0 50%;
     color: #616060;
     max-width: 50%;
+    background: #fff;
   }
 `;
 
 export const StyledSettingItem = styled.div`
-  margin-left: 12px;
+  margin-left: 8px;
   flex: 0 0 50%;
   display: flex;
   align-items: center;

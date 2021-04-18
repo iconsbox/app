@@ -60,10 +60,11 @@ const Search = () => {
   return (
     <StyledContent>
       <StyledHeadBar columns={7}>
-        <Cell width={4} top={1}>
+        <Cell width={7} top={1} className="alignCenter">
           <h3>
             Search <strong>icon</strong>
           </h3>
+          <p>on 32k+ icon</p>
         </Cell>
       </StyledHeadBar>
       <SearchBox onSearch={onSearch} />

@@ -28,3 +28,17 @@ a {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.alignCenter {
+  display: flex;
+  align-items: center;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -116,6 +116,19 @@ export const StyledFiltersWrapper = styled(motion.div)`
     flex: 0 0 50%;
     color: #616060;
   }
+
+  @media (max-width: 440px) {
+    display: flex;
+    flex-direction: column;
+    > div {
+      margin-left: 0;
+      margin-top: 10px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
 `;
 
 export const FormItem = styled.div`

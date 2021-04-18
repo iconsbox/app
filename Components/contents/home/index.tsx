@@ -70,12 +70,12 @@ const Content = ({ scrollerRef }: Props) => {
       transition={{ duration: 0.3 }}
     >
       <StyledHeadbar columns={7}>
-        <Cell width={4} top={1}>
+        <Cell width={3} top={1}>
           <h3>
             Choose <strong>package</strong>
           </h3>
         </Cell>
-        <Cell width={3} top={1}>
+        <Cell width={4} top={1} className="flexEnd">
           <StyledSearchBox
             onClick={() => router.push("/?page=search")}
             className="noselect"
