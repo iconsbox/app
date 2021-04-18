@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: '10.x'
       - name: Install 🎢
-        run: yarn install --force
+        run: npm install
       - name: Build 🧩
         run: yarn run build:static
         env:
