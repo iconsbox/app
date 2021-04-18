@@ -96,10 +96,8 @@ export const StyledTabsWrapper = styled(Tabs)`
   }
 
   @media (max-width: 768px) {
-    .react-tabs__tab-list,
-    .react-tabs__tab-panel {
-      margin-left: -18px;
-      margin-right: -18px;
-    }
+    margin-left: -18px;
+    margin-right: -18px;
+    max-width: 100vw;
   }
 `;

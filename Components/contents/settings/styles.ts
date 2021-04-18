@@ -45,6 +45,7 @@ export const StyledSettingItemWrapper = styled(motion.div)`
     margin: 0 6px;
     flex: 0 0 50%;
     color: #616060;
+    max-width: 50%;
   }
 `;
 
@@ -54,4 +55,5 @@ export const StyledSettingItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  max-width: 50%;
 `;

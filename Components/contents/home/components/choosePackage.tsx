@@ -23,7 +23,10 @@ const ChoosePackage = () => {
   };
 
   return (
-    <StyledChoosePackageGrid className="noselect" columns={7}>
+    <StyledChoosePackageGrid
+      className={`noselect ${!activePackage ? "notChose" : "chose"}`}
+      columns={7}
+    >
       {Object.keys(packages).map((pack) => {
         return (
           <PackageCell

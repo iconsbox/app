@@ -21,7 +21,7 @@ const Favorites = () => {
       transition={{ duration: 0.3 }}
     >
       <StyledHeadbar columns={7}>
-        <Cell width={4} top={1}>
+        <Cell width={7} top={1}>
           <h3>
             <strong>Favorite</strong> and picked icons
           </h3>

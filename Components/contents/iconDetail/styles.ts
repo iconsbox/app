@@ -125,7 +125,7 @@ export const StyledIconWrapper = styled(Grid)`
   }
 
   @media (max-width: 700px) {
-    .icon-wrapper {
+    > div {
       grid-column-end: span 24;
     }
   }

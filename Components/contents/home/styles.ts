@@ -43,6 +43,17 @@ export const StyledChoosePackageGrid = styled(Grid)`
   padding: 0 12px;
   display: flex;
   overflow-x: auto !important;
+
+  &.notChose {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+
+    > div {
+      flex: 1;
+      min-width: 120px;
+      flex-basis: 20%;
+    }
+  }
   &::-webkit-scrollbar {
     width: 0;
     background: transparent; / make scrollbar transparent /
@@ -189,7 +200,7 @@ export const StyledEmptyPackagesList = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 20rem;
+  height: 200px;
   font-weight: 600;
   color: #bfc0c5;
 `;
