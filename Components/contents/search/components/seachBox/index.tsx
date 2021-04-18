@@ -102,7 +102,7 @@ function SearchBox({ onSearch }: Props) {
   };
 
   const handleSelectIconStyleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, iconsStyle: e.target.value.toLowerCase() });
+    setFilters({ ...filters, iconsStyle: e.target.value });
   };
 
   return (
@@ -111,7 +111,7 @@ function SearchBox({ onSearch }: Props) {
         <input
           type="text"
           placeholder="Enter keyword ..."
-          onChange={(e) => setKeyword(e.target.value)}
+          onChange={(e) => setKeyword(e.target.value.toLowerCase())}
         />
         <button
           type="button"
