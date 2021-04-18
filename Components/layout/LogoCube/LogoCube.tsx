@@ -45,21 +45,21 @@ function LogoCube({
       className={`${fixed ? "fixed" : ""} ${className}`}
       size={size}
     >
-      <StyledCube className={`show-${animateSlides[slide]}`}>
-        <StyledCubeFigure className="front">Icon</StyledCubeFigure>
-        <StyledCubeFigure className="back" />
-        <StyledCubeFigure className="right">Box</StyledCubeFigure>
-        <StyledCubeFigure className="left">
+      <StyledCube className={`cube show-${animateSlides[slide]}`}>
+        <StyledCubeFigure className="cubeFigure front">Icon</StyledCubeFigure>
+        <StyledCubeFigure className="cubeFigure back" />
+        <StyledCubeFigure className="cubeFigure right">Box</StyledCubeFigure>
+        <StyledCubeFigure className="cubeFigure left">
           <span aria-label="love" role="img">
             🥰
           </span>
         </StyledCubeFigure>
-        <StyledCubeFigure className="top">
+        <StyledCubeFigure className="cubeFigure top">
           <span aria-label="yeah" role="img">
             😉
           </span>
         </StyledCubeFigure>
-        <StyledCubeFigure className="bottom" />
+        <StyledCubeFigure className="cubeFigure bottom" />
       </StyledCube>
     </StyledLogoCube>
   );

@@ -106,7 +106,7 @@ function Main() {
 
         <LogoCube
           fixed={isLoading}
-          className={`${!isLoading ? "loaded" : ""} ${
+          className={`loadingCube ${!isLoading ? "loaded" : ""} ${
             isMobile && !isLoading ? "hide" : ""
           }`}
         />
