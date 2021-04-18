@@ -9,8 +9,8 @@ const NotFound = () => {
         Sorry, We found nothing!
       </h3>
       <p>
-        Try other synonyms or maybe you could help us to improve icons directory
-        with
+        Try other synonyms or remove filters, maybe you could help us to improve
+        our icon packs with
         <a
           href="https://github.com/snappmarket/IconBox/issues/new"
           target="_blank"

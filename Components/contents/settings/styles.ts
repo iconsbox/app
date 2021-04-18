@@ -23,4 +23,6 @@ export const StyledForm = styled.div`
   height: 20rem;
   font-weight: 600;
   color: #bfc0c5;
+
+  padding: 20px;
 `;

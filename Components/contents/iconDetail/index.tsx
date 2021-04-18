@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Cell } from "styled-css-grid";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import {
   Package,
   LOCALSTORAGE_NAME,
   LocalStorageSavedItem,
+  fastArrayUniq,
 } from "../../../Helpers";
 import {
   StyledIconWrapper,
@@ -29,11 +30,11 @@ import {
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */
 
 const Icon = () => {
-  const [color, setColor] = useState("");
-  const [activeIcon, setActiveIcon] = useRecoilState(activeIconState);
   const router = useRouter();
-  const page = (router.query.page as string) || "home";
+  const [color, setColor] = useState("");
   const packages = useRecoilValue<Packages>(packagesState);
+  const [activeIcon, setActiveIcon] = useRecoilState(activeIconState);
+  const page = (router.query.page as string) || "home";
   const currentPackageName = (router.query.package as string) || "";
   const currentPackage: Package = packages[currentPackageName];
 
@@ -53,32 +54,34 @@ const Icon = () => {
     errorRetryInterval: 2000,
   });
 
-  const iconNameSplit = activeIcon
-    .replace(/([a-z](?=[A-Z]))/g, "$1 ")
-    .toLowerCase()
-    .split(" ");
-  const iconKeywords = [
-    activeIcon,
-    activeIcon.replace("Icon", ""),
-    ...getMultiSynonyms(iconNameSplit),
-  ];
-
-  console.log({
-    activeIcon,
-    iconKeywords,
-  });
+  let iconKeywords: string[] = [];
+  if (activeIcon) {
+    const iconNameSplit = activeIcon
+      .replace(/([a-z](?=[A-Z]))/g, "$1 ")
+      .toLowerCase()
+      .split(" ");
+    iconKeywords = fastArrayUniq([
+      activeIcon,
+      activeIcon.replace("Icon", ""),
+      ...getMultiSynonyms(iconNameSplit),
+    ]);
+  }
 
   const handleColorChange = (colorName: string) => () => {
     setColor(colorName);
   };
 
   const handleClose = (forceHome?: boolean) => async () => {
-    setActiveIcon("");
-    let query = `/?page=${forceHome ? "home" : page}`;
-    if (currentPackageName) {
-      query += `&package=${currentPackageName}`;
+    if (!forceHome) {
+      router.back();
+    } else {
+      let query = `/?page=${forceHome ? "home" : page}`;
+      if (currentPackageName) {
+        query += `&package=${currentPackageName}`;
+      }
+      await router.push(query);
     }
-    await router.push(query);
+    setActiveIcon("");
   };
 
   /**
@@ -103,7 +106,7 @@ const Icon = () => {
     setFavorite(!favorite);
   };
 
-  if (!currentPackage) {
+  if (!currentPackage || !activeIcon) {
     return <>Loading...</>;
   }
 

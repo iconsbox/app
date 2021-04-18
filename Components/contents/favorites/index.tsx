@@ -6,9 +6,9 @@ import {
   StyledEmptyPackagesList,
 } from "./styles";
 import { LOCALSTORAGE_NAME, LocalStorageSavedItem } from "../../../Helpers";
-import SadIcon from "../search/SadIcon";
+import SadIcon from "../search/components/notFound/SadIcon";
 import { StyledPackageIcons } from "../home/styles";
-import IconCard from "../home/partials/iconCard";
+import IconCard from "../home/components/iconCard";
 
 const Favorites = () => {
   const savedFavIcons = localStorage.getItem(LOCALSTORAGE_NAME) || "[]";

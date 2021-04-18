@@ -85,4 +85,15 @@ export const StyledEmptyPackagesList = styled.div`
   height: 20rem;
   font-weight: 600;
   color: #bfc0c5;
+  padding: 20px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table,
+  td,
+  th {
+    border: 1px solid black;
+  }
 `;

@@ -36,36 +36,18 @@ export const StyledHeadBar = styled(Grid)`
     top: -1px;
     font-weight: 300;
   }
-`;
-
-export const StyledChoosePackageGrid = styled(Grid)`
-  padding: 0 12px;
-  display: flex;
-  overflow-x: auto !important;
-  &::-webkit-scrollbar {
-    width: 0;
-    background: transparent; / make scrollbar transparent /
-  }
-`;
-
-export const StyledSearchBox = styled.div`
-  background: #fff;
-  border-radius: 8px;
-  padding: 12px;
-  color: #bfc0c5;
-  display: flex;
-  font-size: 12px;
-  position: relative;
-  bottom: -10px;
-  white-space: nowrap;
-  padding-left: 32px;
-  overflow: hidden;
-  cursor: pointer;
-
-  svg {
-    margin-right: 10px;
+  .toggleBtn {
     position: absolute;
-    left: 10px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #efefef;
+    border: none;
+    padding: 0px;
+    font-size: 26px;
+    width: 43px;
+    color: #4c4c4c;
+    border-radius: 5px;
   }
 `;
 
@@ -191,39 +173,4 @@ export const StyledEmptyPackagesList = styled.div`
   height: 20rem;
   font-weight: 600;
   color: #bfc0c5;
-`;
-
-export const StyledLoading = styled(Grid)`
-  z-index: 9999;
-  bottom: 0;
-  text-align: center;
-  height: 72px;
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 20px;
-  text-transform: uppercase;
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.4);
-  padding-right: 55px;
-`;
-
-export const StyledNotFound = styled.div`
-  margin: auto 2%;
-
-  h3 {
-    margin-bottom: 1rem;
-  }
-  svg {
-    margin-right: 0.8rem;
-    width: 1.8rem;
-    height: 1.8rem;
-    position: relative;
-    bottom: -0.4rem;
-  }
 `;

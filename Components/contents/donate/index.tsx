@@ -17,7 +17,22 @@ const Donate = () => {
         </Cell>
       </StyledHeadbar>
 
-      <StyledEmptyPackagesList>BIT COIN</StyledEmptyPackagesList>
+      <StyledEmptyPackagesList>
+        <table>
+          <tr>
+            <th>Method</th>
+            <th>Address</th>
+          </tr>
+          <tr>
+            <td>Bitcoin</td>
+            <td>add</td>
+          </tr>
+          <tr>
+            <td>Ripple</td>
+            <td>Griffin</td>
+          </tr>
+        </table>
+      </StyledEmptyPackagesList>
     </StyledContent>
   );
 };

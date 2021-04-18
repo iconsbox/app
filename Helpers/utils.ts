@@ -10,6 +10,21 @@ export function chooseWeighted(items: any[], chances: number[]) {
   return items[chances.filter((el: number) => el <= rand).length];
 }
 
+export function fastArrayUniq(a: string[]) {
+  const seen: any = {};
+  const out = [];
+  const len = a.length;
+  let j = 0;
+  for (let i = 0; i < len; i++) {
+    const item = a[i];
+    if (seen[item] !== 1) {
+      seen[item] = 1;
+      out[j++] = item;
+    }
+  }
+  return out;
+}
+
 export const textFetcher = (...args: any) =>
   // @ts-ignore
   fetch(...args).then((res) => res.text());
@@ -76,7 +91,25 @@ export const getMultiSynonyms = (wordsArray: string[]) => {
 
 export const makeSvgPath = (pack: string, icon: string) =>
   `import ${icon} from '${pack}/${icon}/index.svg';`;
+
 export const makeComponentPath = (pack: string, icon: string) =>
   `import { ${icon} } from '${pack}';`;
+
 export const makeSpritePath = (pack: string, icon: string) =>
   `import { ${icon} } from '${pack}/sprite';`;
+
+export const makeInstallText = (pack: string) =>
+  `yarn add ${pack}
+
+# or
+
+npm install ${pack}`;
+
+export const makeComponentText = (icon: string) => `
+
+
+function MyComponent() {
+  return <${icon} />;
+}
+
+export default MyComponent;`;

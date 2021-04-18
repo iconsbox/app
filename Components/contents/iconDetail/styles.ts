@@ -125,9 +125,9 @@ export const StyledIconWrapper = styled(Grid)`
   }
 
   @media (max-width: 700px) {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    .icon-wrapper {
+      grid-column-end: span 24;
+    }
   }
 `;
 

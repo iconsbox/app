@@ -3,8 +3,8 @@ import { Search3Icon } from "@iconbox/iconly";
 import { Cell } from "styled-css-grid";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
-import ChoosePackage from "./partials/choosePackage";
-import PackageIcons from "./partials/packageIcons";
+import ChoosePackage from "./components/choosePackage";
+import PackageIcons from "./components/packageIcons";
 
 import {
   activePackageState,

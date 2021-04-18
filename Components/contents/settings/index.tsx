@@ -14,9 +14,10 @@ const Settings = () => {
       </StyledHeadBar>
 
       <StyledForm>
-        list icons size - default color - download action - copy action -
+        list icons size - Default color - download action - copy action -
         language - dark mode - stop animations - drag&drop functionality -
-        packages order: alphabetical, icons count, popularity
+        packages order: alphabetical, icons count, popularity Icon detail button
+        action: Download svg, copy react import, copy sprite import,
       </StyledForm>
     </StyledContent>
   );

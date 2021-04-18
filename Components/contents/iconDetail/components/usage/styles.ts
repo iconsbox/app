@@ -32,6 +32,9 @@ export const StyledTabsWrapper = styled(Tabs)`
   .react-tabs__tab {
     min-width: 100px;
     text-align: center;
+    font-size: 14px;
+    border: none;
+    padding: 10px 9px;
   }
 
   .react-tabs__tab--selected {
@@ -90,5 +93,13 @@ export const StyledTabsWrapper = styled(Tabs)`
     color: #999;
     display: block;
     opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .react-tabs__tab-list,
+    .react-tabs__tab-panel {
+      margin-left: -18px;
+      margin-right: -18px;
+    }
   }
 `;

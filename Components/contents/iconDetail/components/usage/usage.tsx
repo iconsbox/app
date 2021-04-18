@@ -7,6 +7,8 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneLight as theme } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import {
   makeComponentPath,
+  makeComponentText,
+  makeInstallText,
   makeSpritePath,
   makeSvgPath,
 } from "../../../../../Helpers";
@@ -23,11 +25,7 @@ function Usage({ pack, icon }: Props) {
       At first you need to install{" "}
       <span className="code package-name2">{pack}</span> with one of this ways:
       <SyntaxHighlighter language="bash" style={theme}>
-        {`yarn add ${pack}
-
-# or
-
-npm install ${pack}`}
+        {makeInstallText(pack)}
       </SyntaxHighlighter>
       then you can use it in your code:
     </div>
@@ -56,7 +54,7 @@ npm install ${pack}`}
         <Tab key="react-native" disabled>
           ReactNative
         </Tab>
-        <Tab key="svelte" disabled>
+        <Tab key="vue" disabled>
           Vue
         </Tab>
         <Tab key="svelte" disabled>
@@ -71,23 +69,18 @@ npm install ${pack}`}
         <h3>Usage with React </h3>
         {globalDescription}
         <SyntaxHighlighter language="javascript" style={theme}>
-          {`${makeComponentPath(pack, icon)}`}
+          {makeComponentPath(pack, icon)}
         </SyntaxHighlighter>
         <p>
           And the you can easily use it in your components:
           <SyntaxHighlighter language="javascript" style={theme}>
-            {`${makeComponentPath(pack, icon)}
-
-function MyComponent() {
-  return <DateFruitIcon />;
-}
-
-export default MyComponent;`}
+            {makeComponentPath(pack, icon)}
+            {makeComponentText(icon)}
           </SyntaxHighlighter>
           This code will automatically tree-shaked by webpack and you can use
           one icon from each library without fair of increasing bundle size.
         </p>
-        <p>
+        <div>
           Also you can customize your webpack config using a plugin like
           <span className="code">transform-import</span> to change import paths
           to the direct component path, like this:
@@ -103,7 +96,7 @@ export default MyComponent;`}
           the <span className="code">isClient</span> could decide between SSR
           and CSR and load svg files cjs version in server.
           {footer}
-        </p>
+        </div>
       </TabPanel>
 
       <TabPanel key="react-sprite">
@@ -115,13 +108,8 @@ export default MyComponent;`}
         {globalDescription}
         <p>
           <SyntaxHighlighter language="javascript" style={theme}>
-            {`${makeSpritePath(pack, icon)}
-
-function MyComponent() {
-  return <DateFruitIcon />;
-}
-
-export default MyComponent;`}
+            {makeSpritePath(pack, icon)}
+            {makeComponentText(icon)}
           </SyntaxHighlighter>
           Just like react svg components, this code will automatically
           tree-shaked by webpack and you can use one icon from each library
@@ -138,7 +126,7 @@ export default MyComponent;`}
           </a>{" "}
           to achieve this.
         </p>
-        <p>
+        <div>
           Also you can customize your webpack config using a plugin like
           <span className="code">transform-import</span> to change import paths
           to the direct component path, like this:
@@ -146,28 +134,24 @@ export default MyComponent;`}
             {`[
   'transform-imports',
   {
-    '@iconbox\/?(((\\w*)?\/?)*)': {
-    'transform': isClient ? '@iconbox/\${1}/esm/\${member}' : '@iconbox/\${1}/\${member}',
-  },
-}]`}
+    '@iconbox\\/?(((\\\\w*)?\\/?)*)\\/sprite': {
+      'transform': isClient ? '@iconbox/\${1}/esm/\${member}/sprite' : '@iconbox/\${1}/\${member}/sprite',
+    },
+  }
+]`}
           </SyntaxHighlighter>
           the <span className="code">isClient</span> could decide between SSR
           and CSR and load svg files cjs version in server.
           {footer}
-        </p>
+        </div>
       </TabPanel>
 
       <TabPanel key="svg">
         <h3>SVG</h3>
         {globalDescription}
         <SyntaxHighlighter language="javascript" style={theme}>
-          {`${makeSvgPath(pack, icon)}
-
-function MyComponent() {
-  return <img src={${icon}} />;
-}
-
-export default MyComponent;`}
+          {makeSvgPath(pack, icon)}
+          {makeComponentText(icon)}
         </SyntaxHighlighter>
         {footer}
       </TabPanel>
@@ -175,10 +159,13 @@ export default MyComponent;`}
         <h3>Not ready yet: react-native</h3>
       </TabPanel>
 
+      <TabPanel key="vue">
+        <h3>Not ready yet: vue</h3>
+      </TabPanel>
+
       <TabPanel key="svelte">
         <h3>Not ready yet: svelte</h3>
       </TabPanel>
-
       <TabPanel key="angular">
         <h3>Not ready yet: angular</h3>
       </TabPanel>
