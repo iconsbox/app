@@ -9,11 +9,13 @@
     "start": "next start",
     "eslint": "eslint . --ext .ts,.tsx --fix",
     "stylelint": "stylelint \"**/*.(ts|tsx)\" --fix",
-    "lint": "yarn compile && yarn eslint && yarn stylelint"
+    "lint": "yarn compile && yarn eslint && yarn stylelint",
+    "deploy": "yarn build:static && gh-pages -d docs -r https://$GH_TOKEN@github.com/iconsbox/app"
   },
   "dependencies": {
     "@iconbox/iconly": "^2.0.1",
     "framer-motion": "^4.1.3",
+    "gh-pages": "^3.1.0",
     "next": "10.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
