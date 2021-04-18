@@ -100,6 +100,7 @@ export const StyledCard = styled.div`
         rgba(245, 245, 245, 1) 100%
       );
       border-radius: 0.6rem;
+      z-index: 0;
     }
   }
 `;

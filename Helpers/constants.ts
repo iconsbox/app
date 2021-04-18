@@ -20,8 +20,8 @@ export const listCopyButtonActions = [
 ];
 export const languages = ["English"];
 export const modes = ["Light"];
-export const animations = ["Active", "DeActive"];
-export const dragDropFunctionalities = ["Paste svg", "Paste svg url"];
+export const animations = ["Active"];
+export const dragDropFunctionalities = ["Paste svg content", "Paste svg url"];
 export const packagesOrders = [
   "Alphabetical",
   "Icons count",

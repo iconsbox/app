@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Grid } from "styled-css-grid";
 import { motion } from "framer-motion";
 
-export const StyledContent = styled(motion.div)`
+export const StyledContent = styled.div`
   background: #f8f8f8;
   min-height: 100%;
   position: absolute;
@@ -50,6 +50,7 @@ export const StyledBreadcrumb = styled.div`
   align-items: center;
   height: 40px;
   position: relative;
+  overflow: auto;
   * {
     font-weight: 400 !important;
     font-size: 12px;

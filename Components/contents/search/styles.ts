@@ -120,6 +120,7 @@ export const StyledPackageCard = styled(Cell)`
           rgba(245, 245, 245, 1) 100%
         );
         border-radius: 0.6rem;
+        z-index: 0;
       }
     }
   }

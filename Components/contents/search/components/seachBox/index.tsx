@@ -102,7 +102,7 @@ function SearchBox({ onSearch }: Props) {
   };
 
   const handleSelectIconStyleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, iconsStyle: e.target.value });
+    setFilters({ ...filters, iconsStyle: e.target.value.toLowerCase() });
   };
 
   return (

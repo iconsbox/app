@@ -111,13 +111,9 @@ const Icon = () => {
   }
 
   return (
-    <StyledContent
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
+    <StyledContent>
       <StyledHeadBar columns={7}>
-        <Cell width={4} top={1}>
+        <Cell width={6} top={1}>
           <StyledBreadcrumb>
             <a
               role="button"
@@ -136,7 +132,7 @@ const Icon = () => {
             </h3>
           </StyledBreadcrumb>
         </Cell>
-        <Cell width={3} top={1}>
+        <Cell width={1} top={1}>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
           <div role="button" onClick={handleClose()} className="close">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
