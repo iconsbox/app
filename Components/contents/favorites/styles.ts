@@ -79,11 +79,19 @@ export const StyledPackageInfo = styled.div`
 `;
 
 export const StyledEmptyPackagesList = styled.div`
-  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 20rem;
-  font-weight: 600;
-  color: #bfc0c5;
+  flex-direction: column;
+  height: 60vh;
+
+  p {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #d6d6d6;
+  }
+  svg {
+    fill: #d6d6d6;
+  }
 `;

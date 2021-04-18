@@ -1,5 +1,33 @@
 export const LOCALSTORAGE_NAME = "_iconbox_favs";
 
+export const iconSizes = ["14px", "18px", "24px", "32px"];
+export const iconColors = ["#333", "#888", "#D23E3E", "#184fb5", "#75ae49"];
+export const iconDetailPageCTAs = [
+  "Download SVG file",
+  "Copy react import",
+  "Copy svg import",
+  "Copy react sprite import",
+  "Copy vue import",
+  "Copy svelte import",
+];
+export const listCopyButtonActions = [
+  "Copy pure svg",
+  "Copy react import",
+  "Copy svg import",
+  "Copy react sprite import",
+  "Copy vue import",
+  "Copy svelte import",
+];
+export const languages = ["English"];
+export const modes = ["Light"];
+export const animations = ["Active", "DeActive"];
+export const dragDropFunctionalities = ["Paste svg", "Paste svg url"];
+export const packagesOrders = [
+  "Alphabetical",
+  "Icons count",
+  "Package popularity",
+];
+
 export const SYNONYM_WORDS = [
   ["add", "increase", "include", "invite", "plus", "positive"],
   ["airplane", "plane", "rocket", "aircraft", "jet", "ship", "cab", "ship"],

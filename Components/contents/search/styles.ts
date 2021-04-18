@@ -7,7 +7,7 @@ export const StyledContent = styled.div`
 `;
 
 export const StyledHeadBar = styled(Grid)`
-  padding: 4px 16px;
+  padding: 4px 22px;
 
   h3 {
     display: inline-block;

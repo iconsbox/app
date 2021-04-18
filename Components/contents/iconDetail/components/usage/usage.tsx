@@ -68,15 +68,11 @@ function Usage({ pack, icon }: Props) {
       <TabPanel key="react">
         <h3>Usage with React </h3>
         {globalDescription}
+
         <SyntaxHighlighter language="javascript" style={theme}>
-          {makeComponentPath(pack, icon)}
+          {`${makeComponentPath(pack, icon)} ${makeComponentText(icon)}`}
         </SyntaxHighlighter>
         <p>
-          And the you can easily use it in your components:
-          <SyntaxHighlighter language="javascript" style={theme}>
-            {makeComponentPath(pack, icon)}
-            {makeComponentText(icon)}
-          </SyntaxHighlighter>
           This code will automatically tree-shaked by webpack and you can use
           one icon from each library without fair of increasing bundle size.
         </p>
@@ -108,8 +104,7 @@ function Usage({ pack, icon }: Props) {
         {globalDescription}
         <p>
           <SyntaxHighlighter language="javascript" style={theme}>
-            {makeSpritePath(pack, icon)}
-            {makeComponentText(icon)}
+            {`${makeComponentPath(pack, icon)} ${makeComponentText(icon)}`}
           </SyntaxHighlighter>
           Just like react svg components, this code will automatically
           tree-shaked by webpack and you can use one icon from each library

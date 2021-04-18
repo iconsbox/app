@@ -69,21 +69,6 @@ export const StyledSearchBox = styled.div`
   }
 `;
 
-export const StyledFiltersWrapper = styled(motion.div)`
-  background: #fff;
-  border-radius: 8px;
-  color: #656565;
-  display: flex;
-  font-size: 14px;
-  white-space: nowrap;
-  padding: 15px 20px;
-  overflow: hidden;
-  cursor: pointer;
-  margin: 10px 15px 0 17px;
-  display: flex;
-  justify-content: space-around;
-`;
-
 export const StyledSearchButton = styled.button`
   display: flex;
   align-items: center;
@@ -108,12 +93,20 @@ export const StyledSearchButton = styled.button`
   }
 `;
 
-export const FormItem = styled.div`
-  margin-right: 16px;
-  flex: 0 0 50%;
+export const StyledFiltersWrapper = styled(motion.div)`
+  background: #fff;
+  border-radius: 8px;
+  color: #656565;
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  font-size: 14px;
+  white-space: nowrap;
+  padding: 15px 20px;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 10px 15px 0 17px;
+  display: flex;
+  justify-content: space-around;
+
   select {
     padding: 6px 9px 6px 5px;
     border: none;
@@ -121,5 +114,14 @@ export const FormItem = styled.div`
     border-radius: 3px;
     margin: 0 6px;
     flex: 0 0 50%;
+    color: #616060;
   }
+`;
+
+export const FormItem = styled.div`
+  margin-left: 16px;
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 `;

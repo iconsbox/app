@@ -166,6 +166,7 @@ function SearchBox({ onSearch }: Props) {
               <select
                 onChange={handleSelectIconStyleFilter}
                 onBlur={handleSelectIconStyleFilter}
+                disabled
               >
                 {iconStyles.map((style) => (
                   <option key={style} value={style}>

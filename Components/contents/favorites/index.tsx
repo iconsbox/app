@@ -37,7 +37,7 @@ const Favorites = () => {
       ) : (
         <StyledEmptyPackagesList>
           <SadIcon />
-          You have no favorite icon
+          <p>You have no favorite icon</p>
         </StyledEmptyPackagesList>
       )}
     </StyledContent>
