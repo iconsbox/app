@@ -5,7 +5,7 @@ import { Packages } from "../../../Helpers";
 import PackageIcons from "../home/components/packageIcons";
 import NotFound from "./components/notFound";
 import SearchBox from "./components/seachBox";
-import EmptySearch from "./components/EmptySearch";
+import EmptySearch from "./components/emptySearch";
 import { StyledHeadBar, StyledContent } from "./styles";
 
 const Search = () => {
