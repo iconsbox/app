@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { StyledLogoCube, StyledCube, StyledCubeFigure } from "./styles";
 
 type Props = {
@@ -21,7 +21,7 @@ function LogoCube({
   const [slide, setSlide] = useState(1);
   const animateSlides = [0, 5, 4, 1, 3];
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let timeout;
     if (withDelay && slide === 4) {
       timeout = 3000;

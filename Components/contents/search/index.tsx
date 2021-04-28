@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Cell } from "styled-css-grid";
-import { StyledHeadBar, StyledContent } from "./styles";
-import SearchBox from "./components/seachBox";
+import { useRouter } from "next/router";
 import { Packages } from "../../../Helpers";
 import PackageIcons from "../home/components/packageIcons";
 import NotFound from "./components/notFound";
-import { useRouter } from "next/router";
+import SearchBox from "./components/seachBox";
+import EmptySearch from "./components/EmptySearch";
+import { StyledHeadBar, StyledContent } from "./styles";
 
 const Search = () => {
   const [loaded, setLoaded] = useState(false);
@@ -68,9 +69,13 @@ const Search = () => {
         </Cell>
       </StyledHeadBar>
       <SearchBox onSearch={onSearch} />
-      {Object.keys(searchResults).length
-        ? renderSearchResult()
-        : loaded && <NotFound />}
+      {Object.keys(searchResults).length ? (
+        renderSearchResult()
+      ) : loaded ? (
+        <NotFound />
+      ) : (
+        <EmptySearch />
+      )}
     </StyledContent>
   );
 };
