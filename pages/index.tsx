@@ -50,7 +50,7 @@ function Main() {
   }, [activeIcon, setActiveIcon]);
 
   const { data, error } = useSWR(
-    "https://raw.githubusercontent.com/iconsbox/icons/master/app/data.js",
+    "https://raw.githubusercontent.com/iconsbox/icons/master/packages/data.js",
     fetcher,
     {
       errorRetryCount: 3,
